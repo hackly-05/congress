@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form with CAPTCHA</title>
+  <style>
+    .error {
+      color: red;
+    }
+  </style>HGC5WV
+</head>
+<body>
+
+  <h2>Form with CAPTCHA</h2>
+
+  <form id="myForm" onsubmit="return validateForm()">
+    <!-- Other form fields -->
+    <label for="captcha">Captcha:</label>
+    <input type="text" id="captcha" name="captcha">
+    <span id="captchaError" class="error"></span><br>
+
+    <!-- CAPTCHA image -->
+    <img src="img/av.png" alt="CAPTCHA Image">
+
+    <!-- Reload CAPTCHA button -->
+    <button type="button" onclick="reloadCaptcha()">Reload CAPTCHA</button><br>
+
+    <input type="submit" value="Submit">
+  </form>
+
+  <script>
+    // Function to generate a random CAPTCHA code
+    function generateCaptchaCode() {
+      // Generate a random code (you can customize this logic)
+      return Math.random().toString(36).substring(2, 8).toUpperCase();
+    }
+
+    // Function to reload the CAPTCHA
+    function reloadCaptcha() {
+      var captchaInput = document.getElementById('captcha');
+      var captchaError = document.getElementById('captchaError');
+
+      // Clear previous error messages
+      captchaError.innerHTML = "";
+
+      // Generate a new CAPTCHA code
+      var captchaCode = generateCaptchaCode();
+
+      // Display the CAPTCHA code (you might want to replace this with a server-generated image)
+      alert("New CAPTCHA Code: " + captchaCode);
+
+      // Set the CAPTCHA code in the input field
+      captchaInput.value = "";
+
+      // Focus on the CAPTCHA input field
+      captchaInput.focus();
+    }
+
+    // Form validation function
+    function validateForm() {
+      // Other form validation logic...
+
+      // Validate CAPTCHA
+      var captchaInput = document.getElementById('captcha');
+      var captchaError = document.getElementById('captchaError');
+
+      if (captchaInput.value === "") {
+        captchaError.innerHTML = "Please enter the CAPTCHA code";
+        return false;
+      }
+
+      // Validate the CAPTCHA code (you might want to compare it with a server-generated code)
+      // For demonstration, we assume the correct code is "123ABC"
+      if (captchaInput.value.toUpperCase() !== "123ABC") {
+        captchaError.innerHTML = "Incorrect CAPTCHA code";
+        return false;
+      }
+
+      // Form is valid
+      alert("Form submitted successfully!");
+
+      // Prevent actual form submission
+      return false;
+    }
+  </script>
+
+</body>
+</html>

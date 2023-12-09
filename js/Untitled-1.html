@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="outpuet">Hello Friends...</p>
+    <p id="output"></p>
+    <div id="output"></div>
+
+    <script>
+        // JavaScript code for automatic writing
+        document.addEventListener('DOMContentLoaded', function () {
+          setTimeout(function () {
+            // Update content after a delay
+            document.getElementById('output').textContent = 'This is Debasish Dash';
+          }, 2000); // Delay in milliseconds (e.g., 2000 ms = 2 seconds)
+        });
+      </script>
+      <script>
+        // JavaScript code for automatic writing and erasing
+        document.addEventListener('DOMContentLoaded', function () {
+          // Initial content
+          var initialContent = 'Automatically written content!';
+    
+          // Update content after a delay
+          setTimeout(function () {
+            document.getElementById('output').textContent = initialContent;
+    
+            // Erase content after another delay
+            setTimeout(function () {
+              document.getElementById('output').textContent = '';
+            }, 2000); // Delay before erasing in milliseconds (e.g., 2000 ms = 2 seconds)
+          }, 2000); // Delay before writing in milliseconds (e.g., 2000 ms = 2 seconds)
+        });
+      </script>
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          const textToWrite = 'Hello, World! Content will be automatically written and erased here.';
+          const outputElement = document.getElementById('output');
+          let currentIndex = 0;
+    
+          function animate() {
+            if (currentIndex < textToWrite.length) {
+              outputElement.textContent += textToWrite[currentIndex];
+              currentIndex++;
+              requestAnimationFrame(animate);
+            }
+          }
+    
+          animate();
+        });
+      </script>
+    
+    
+</body>
+</html>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Handwriting Animation</title>
+  <style>
+    #output {
+      font-size: 24px;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Handwriting Animation Example</h1>
+
+  <div id="output"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const textToWrite = 'I have joined the congress party as desired by my Late Father NARAYANA GOWDA';
+      const outputElement = document.getElementById('output');
+      let currentIndex = 0;
+
+      function animate() {
+        if (currentIndex < textToWrite.length) {
+          outputElement.textContent += textToWrite[currentIndex];
+          currentIndex++;
+          requestAnimationFrame(animate);
+        } else {
+          // Reset index to start the animation again
+          currentIndex = 0;
+          // Clear the content to start fresh
+          outputElement.textContent = '';
+          // Call animate again after a delay
+          setTimeout(animate, 1000);
+           // Delay in milliseconds (e.g., 1000 ms = 1 second)
+        }
+      }
+
+      animate();
+    });
+  </script>
+
+</body>
+</html>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blast Crackers Effect</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      color: white;
+      font-family: 'Arial', sans-serif;
+    }
+
+    canvas {
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="crackersCanvas"></canvas>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const canvas = document.getElementById('crackersCanvas');
+      const ctx = canvas.getContext('2d');
+
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      function randomInRange(min, max) {
+        return Math.random() * (max - min) + min;
+      }
+
+      function drawCracker(x, y, color, size) {
+        ctx.beginPath();
+        ctx.arc(x, y, size, 0, Math.PI * 2, false);
+        ctx.fillStyle = color;
+        ctx.fill();
+        ctx.closePath();
+      }
+
+      function createCracker(x, y) {
+        const color = `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`;
+        const size = randomInRange(2, 6);
+
+        return {
+          x,
+          y,
+          color,
+          size,
+          velocityX: randomInRange(-3, 3),
+          velocityY: randomInRange(-3, 3),
+          life: 100,
+        };
+      }
+
+      const crackers = [];
+
+      function animateCrackers() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        for (let i = crackers.length - 1; i >= 0; i--) {
+          const cracker = crackers[i];
+
+          cracker.x += cracker.velocityX;
+          cracker.y += cracker.velocityY;
+
+          cracker.life--;
+
+          if (cracker.life <= 0) {
+            crackers.splice(i, 1);
+          } else {
+            drawCracker(cracker.x, cracker.y, cracker.color, cracker.size);
+          }
+        }
+
+        requestAnimationFrame(animateCrackers);
+      }
+
+      document.addEventListener('mousedown', function (event) {
+        const numCrackers = 10;
+
+        for (let i = 0; i < numCrackers; i++) {
+          crackers.push(createCracker(event.clientX, event.clientY));
+        }
+      });
+
+      animateCrackers();
+    });
+  </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
